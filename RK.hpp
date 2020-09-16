@@ -6,10 +6,10 @@
 
 // generic fcn pointer for a linear differential equation, f = y'(x,y)
 // double (*f)(double x, double y)
-// the equation may depend on one independent variable (x) and a
-// dependent variable (y)
+// The equation may depend on one independent variable (x)
+// and a single dependent variable (y)
 // y0: initial condition
-// nsteps, x0, xmax are used to se t the range and h, the step size
+// nsteps, x0, xmax are used to set the range and the step size
 TGraph RK1Solve(double (*f)(double x, double y), double y0,
 		int nsteps, double x0, double xmax);
 

@@ -14,34 +14,34 @@ using namespace std;
 double fun1(double x, double y){
   (void)x;              // prevent unused variable warning
   return -2*y;          // f = y'(x,y) = -2 * y(x)  
-}                       // solution: y(x) = 3 * exp(-2*x) ; y(0)=3
+}                       // solution: y(x) = 3 * exp(-2*x) ; with initial condition y(0)=3
 
 double fun2(double x, double y){
   return -y/x-2/(x*x);  // f = y'(x,y) = -y(x)/x - 2/x^2 
-}                       // -2*log(|x|)/x+2/x  ; y(0)=2
+}                       // -2*log(|x|)/x+2/x  ; with initial condition y(0)=2
 
 int main(int argc, char **argv){
   TApplication theApp("App", &argc, argv); // init ROOT App for displays
 
   // solve our DEQ using RK1 or RK2 methods!
   // Two examples are given.  Choose a fucntion for testing
-  TGraph tg1=RK1Solve(fun1,3,30,0,3);   // initial condition y(0)=3
+  TGraph tg1=RK1Solve(fun1,3,30,0,3);                     // initial condition y(0)=3
   TGraph tg2=RK2Solve(fun1,3,30,0,3);
-  TF1 fun_sol=TF1("fun_sol","3*exp(-2*x)",0,3);   // exact solution
-  //TGraph tg1=RK1Solve(fun2,2,100,1,100);   // initial condition y(1)=2
+  TF1 fun_sol=TF1("fun_sol","3*exp(-2*x)",0,3);           // exact solution
+  //TGraph tg1=RK1Solve(fun2,2,100,1,100);                // initial condition y(1)=2
   //TGraph tg2=RK2Solve(fun2,2,100,1,100);
   //TF1 fun_sol=TF1("fun_sol","-2*log(x)/x+2/x",1,100);   // exact solution
 
-  
   // ******************************************************************************
   // ** this block is useful for supporting both high and std resolution screens **
   UInt_t dh = gClient->GetDisplayHeight()/2;   // fix plot to 1/2 screen height  
   //UInt_t dw = gClient->GetDisplayWidth();
   UInt_t dw = 1.1*dh;
+  // ******************************************************************************
+
   tg1.SetMarkerSize(0.03*dh/8);
   tg2.SetMarkerSize(0.03*dh/8);
   TCanvas *c1 = new TCanvas("c1","DEQ solutions",dw,dh);
-  // ******************************************************************************
 
   tg1.SetMarkerColor(kRed);
   tg2.SetMarkerColor(kGreen-2);
